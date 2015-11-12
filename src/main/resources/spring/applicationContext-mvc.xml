@@ -11,24 +11,23 @@
                 http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.0.xsd
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-                
-   <!-- Automatic search @ Controller annotation classes -->
+
+	<!-- Automatic search @ Controller annotation classes -->
 	<context:component-scan base-package="org.example.**.controller" />
 	<mvc:annotation-driven />
-<!-- 
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath*:config/*.properties</value>
-			</list>
-		</property>
-	</bean>
--->	
+	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="locations"> <list> <value>classpath*:config/*.properties</value> 
+		</list> </property> </bean> -->
 	<!-- Default ViewResolver -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-	    <property name="prefix" value="/WEB-INF/jsp/"/>
-	    <property name="suffix" value=".jsp"/>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"
+		cache-period="31556926" />
+
 </beans>

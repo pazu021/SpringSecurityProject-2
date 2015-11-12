@@ -7,17 +7,26 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
 
 
-	<http>
-		<intercept-url pattern="/**" access="ROLE_USER" />
-		<form-login />
-		<logout />
+	<http use-expressions="true">
+		<intercept-url pattern="^(/resources)/**" access="isAuthenticated()" />
+		<form-login login-page="/login.html" default-target-url="/index.html"
+			authentication-failure-url="/login.html?error=true" />
+	<!-- 		authentication-success-handler-ref="myAuthenticationSuccessHandler" /> -->
+		<logout logout-url="/logout" />
+		<!-- enable csrf protection -->
+		 <csrf/>
 	</http>
+
+<!-- 	<beans:bean id="myAuthenticationSuccessHandler"
+		class="org.example.security.myAuthenticationSuccessHandler" /> -->
 
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
+				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
+				<user name="user" password="user" authorities="ROLE_USER" />
 			</user-service>
+
 		</authentication-provider>
 	</authentication-manager>
 
